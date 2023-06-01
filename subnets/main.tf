@@ -5,5 +5,4 @@ resource "aws_subnet" "main" {
   availability_zone = var.azs[count.index]
 
   tags =  merge(var.tags, { Name = "${var.env}-${var.name}-subnet-${count.index+1}" })
-
 }
