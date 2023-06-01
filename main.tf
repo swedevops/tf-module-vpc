@@ -30,7 +30,8 @@ resource "aws_eip" "ngw" {
 }
 
 #resource "aws_nat_gateway" "ngw" {
-#  allocation_id = aws_eip.example.id
+#  count = length(var.subnets["public"].cidr_block)
+#  allocation_id = aws_eip.ngw[count.index].id
 #  subnet_id     = aws_subnet.example.id
 #
 #  tags = {
@@ -41,3 +42,7 @@ resource "aws_eip" "ngw" {
 #  # on the Internet Gateway for the VPC.
 #  depends_on = [aws_internet_gateway.example]
 #}
+
+output "subnet_ids" {
+  value = module.subnets
+}
